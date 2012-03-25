@@ -10,6 +10,8 @@ updir = os.path.dirname(dirname)
 
 if updir not in sys.path:
     sys.path.insert(0, updir)
+if dirname not in sys.path:
+    sys.path.insert(0, dirname)
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'icelog.settings'
 
