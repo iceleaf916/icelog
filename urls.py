@@ -5,6 +5,11 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^$', 'icelog.views.home', name='home'),
+    url(r'^blog/', include('icelog.blog.urls')),
+)
+
+urlpatterns += patterns('',
     # Examples:
     # url(r'^$', 'icelog.views.home', name='home'),
     # url(r'^icelog/', include('icelog.foo.urls')),
