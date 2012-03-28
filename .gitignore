@@ -1,2 +1,3 @@
 *.pyc
 icelog.db
+my_local_settings.py
