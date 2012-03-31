@@ -89,7 +89,10 @@
 -->
 		</div>
 		<div class="archives col">
-			<h2>Archives</h2>
+            <h2>Category</h2>
+            {% for category in category_list %}
+            <li><a href="/post/category/{{ category.slug }}/" title="{{ category.description }}" >{{ category.name }}</a></li>
+            {% endfor %}
 		</div>
 		<div class="links col">
 			<h2>Links</h2>
