@@ -8,8 +8,16 @@ def index(request):
     category_list = Category.objects.all()
     link_list = Link.objects.all()
     return render_to_response('index.html',{
-                'latest_posts': latest_posts,
+                'post_list': latest_posts,
                 'category_list': category_list,
                 'link_list': link_list,
+                'is_single': False,
+            })
+
+def detail(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    return render_to_response('single.html',{
+                'post': post,
+                'is_single': True,
             })
 

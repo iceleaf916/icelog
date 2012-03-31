@@ -32,7 +32,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return u'/post/%s/' % (self.id, 
+        return u'post/%s/' % (self.id, 
 #                self.created_at.strftime('%m'), 
 #                self.slug or self.title.replace('/', '-'),
         )

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xml:lang="en-US" lang="en-US">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>
+        {% if is_single %}
+            {{ post.title}} | {{ settings.SITE_NAME }}
+        {% else %}
+            {{ settings.SITE_NAME }}
+        {% endif %}
+	</title>
+	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+
+    {% load static %}
+    {% get_static_prefix as STATIC_PREFIX %}
+	<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/style.css" type="text/css" media="screen" /> 
+	<link rel="shortcut icon" type="image/png" href="{{ STATIC_PREFIX }}image/favicon.ico" />    
+	<link href="/feed/atom" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed" />    
+	<script type="text/javascript" src="{{ STATIC_PREFIX }}js/jquery.js"></script>
+	<script type="text/javascript" src="{{ STATIC_PREFIX }}js/main.js"></script>
+</head>
+<body>
+<!-- header start -->
+<div id="header">
+	<div id="nav_wrapper">
+		<div id="nav">
+			<div class="inner">
+				<h1 id="title"><a href="{{ settings.SITE_URL }}">{{ settings.SITE_NAME }}</a></h1>
+				<div id="description" class="seal">{{ settings.SITE_SUB_NAME }}</div>
+				<ul class="right">
+					<li><a href="/">Home</a></li>
+					<li class="dot">&bull;</a>
+					<li><a href="/t/tech">Tech</a></li>
+					<li class="dot">&bull;</a>
+					<li><a href="/t/english">English</a></li>
+					<li class="dot">&bull;</a>
+					<li><a href="/t/paint">Artworks</a></li>
+					<li class="dot">&bull;</a>
+					<li><a href="/t/linux">Linux</a></li>
+					<li class="dot">&bull;</a>
+					<li><a href="/admin/">Login</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="header_inner">
+		<div id="social">
+			<a href="http://twitter.com/happyyezi" target="_blank" title="Follow Me @ Twitter"><img src="{{ STATIC_PREFIX }}image/ic16_twitter.png"></a>
+			<a href="http://github.com/iceleaf916" target="_blank" title="Fork Me @ Github"><img src="{{ STATIC_PREFIX }}image/ic16_github.png"></a>
+			<a href="/feed/" target="_blank" title="Subscribe My Blog"><img src="{{ STATIC_PREFIX }}image/ic16_rss.png"></a>
+		</div>
+<!--
+        <ul id="recent_comments">
+			#range $index, $comm := $.Fn.GetCommentTimeline 0 10 #
+			<li>
+				<a href="/#$comm.Metadata.ArticleName#/#comment_#$comm.Metadata.Name#" class="avatar recent_comment">
+					#if $comm.Metadata.EmailHash#
+					<img src="http://www.gravatar.com/avatar/#$comm.Metadata.EmailHash#?r=g&d=mm&s=32" onerror="javascript:this.src='# STATIC_PREFIX #image/default_avatar.png'"/>
+					#else#
+					<img src="# STATIC_PREFIX #image/default_avatar.png"/>
+					#end#
+				</a>
+				<div class="bubble"><div class="bubble_text">#$comm.Text#</div></div>
+			</li>
+			#end#
+		</ul>
+-->
+		<div class="sep"></div>
+	</div>
+</div>
+<!-- header end -->
+
+<!-- content start -->
+<div id="content">
+{% block content %}{% endblock %}
+</div>
+<!-- content end -->
+
+<!-- footer start -->
+<div id="footer_wrapper">
+<div id="footer">
+	<div id="footer_inner">
+		<div class="tag_cloud col">
+			<h2>Tag Cloud</h2>
+<!--
+            # range $index, $tag := $.Fn.GetTagList 10 #
+			<a class="tag" href="/t/#$tag.Name#">#$tag.Name#(#$tag.Count#)</a>
+			#end#
+-->
+		</div>
+		<div class="archives col">
+			<h2>Archives</h2>
+		</div>
+		<div class="links col">
+			<h2>Links</h2>
+			<ul>
+                {% for link in link_list %}
+				<li><a href="{{ link.url }}">{{ link.name }}</a></li>
+                {% endfor %}
+			</ul>
+		</div>
+		<div class="copyright">
+			© Iceleaf, All rights reserved.
+			<span>&bull;</span> 
+			Powered by <a href="https://github.com/iceleaf916/icelog">Icelog</a> and <a href="https://www.djangoproject.com/">django</a>
+			<span>&bull;</span> 
+			SealScript Theme by <a href="http://shellex.info">Shellex</a>
+		</div>
+	</div>
+</div>
+</div>
+<!--
+#if .Flags.Single#
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);#(document,"script","twitter-wjs");
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+#end#
+-->
+
+{% if settings.GOOGLE_ANALYTICS_UA %}
+<script>
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '{{ settings.GOOGLE_ANALYTICS_UA }}']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+{% endif %}
+<!-- footer end -->
+
+
+<!-- Navigation Utils -->
+<a id="scroll_to_top" href="#" class="v_nav"></a>
+<!--
+{% if is_single %} 
+{% endif %}
+-->
+	<!-- for single page -->
+<!--
+    # $cur_name := .Vars.Name #
+	# $prev_name := $.Fn.GetPrevArticleName $cur_name #
+	# $next_name := $.Fn.GetNextArticleName $cur_name #
+	<a id="prev" href="/#$prev_name#" hash="#$cur_name#" class="v_nav"
+		# if $prev_name # 
+		style="display: block"
+		# else #
+		style="display: none"
+		# end #
+		>
+		<span class="icon">Prev</span>
+	</a>
+	<a id="next" href="/#$next_name#" hash="#$cur_name#" class="v_nav"
+		# if $next_name # 
+		style="display: block"
+		# else #
+		style="display: none"
+		# end #
+		>
+		<span class="icon">Next</span>
+	</a>
+# else #
+-->
+	<!-- for list page -->
+<!--
+  # $cur_offset := .Vars.Offset #
+	# if .Flags.Tag #
+-->
+		<!-- for tag page -->
+<!--
+        # $tag := .Vars.Tag #
+		<a id="prev" href="/t/#$tag#?pos=# $.Fn.GetPrevTagTLPos $tag $cur_offset 10#" class="v_nav" hash="t/#$tag#?pos=#$cur_offset#"
+			# if .Vars.AtBegin # 
+			style="display: none"
+			# else #
+			style="display: block"
+			# end #
+			>
+			<span class="icon">Prev</span>
+		</a>
+		<a id="next" href="/t/#$tag#?pos=# $.Fn.GetNextTagTLPos $tag $cur_offset 10#" class="v_nav" hash="t/#$tag#?pos=#$cur_offset#"
+			# if .Vars.AtEnd # 
+			style="display: none"
+			# else #
+			style="display: block"
+			# end #
+			>
+			<span class="icon">Next</span>
+		</a>
+	# else #
+-->
+	<!-- for articles page -->
+<!--
+    <a id="prev" href="/?pos=# $.Fn.GetPrevTLPos $cur_offset 0#" class="v_nav" hash="pos=#$cur_offset#"
+		# if .Vars.AtBegin # 
+		style="display: none"
+		# else #
+		style="display: block"
+		# end #
+		>
+		<span class="icon">Prev</span>
+	</a>
+	<a id="next" href="/?pos=# $.Fn.GetNextTLPos $cur_offset 0#" class="v_nav" hash="pos=#$cur_offset#"
+		# if .Vars.AtEnd # 
+		style="display: none"
+		# else #
+		style="display: block"
+		# end #
+		>
+		<span class="icon">Next</span>
+	</a>
+	# end #
+# end #
+-->
+<!-- Debug Info -->
+<div style="display:none"> Cost Time: #.ContextInfo.During# microseconds </div>
+</body>
+</html>

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Django settings for icelog project.
 import os
 
@@ -148,6 +149,13 @@ LOGGING = {
     }
 }
 
+# site information
+SITE_NAME = '酷狐'
+SITE_URL = 'http://coolgox.tk/'
+SITE_SUB_NAME = 'Just a cool fox'
+GOOGLE_ANALYTICS_UA = ''
+
+# other importent data
 try:
     from local_settings import *
 except:
