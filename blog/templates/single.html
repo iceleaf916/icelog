@@ -3,7 +3,7 @@
 {% block content %}
 <div class="article">
 	<div class="inner">
-		<h2 class="article_title title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+		<h2 class="article_title title">{{ post.title }}</h2>
 		<div class="article_meta">
 			<div class="share">
 				<a href="https://twitter.com/share" class="twitter-share-button" data-via="shellex">Tweet</a>
@@ -12,7 +12,7 @@
 			<span>by</span>
             {{ post.author }}
 			<span>on</span>
-            {{ post.created_at|date:"D d M Y" }}
+            {{ post.created_at|date:"M d, Y" }}
 			<span>in</span>
             <a href="/blog/category/{{ post.category.slug }}/">{{ post.category.name }}</a>
 		</div>
@@ -24,6 +24,49 @@
             <span>tagged:</span>
             <a class="tag" href="/blog/t/">tag</a>
         </div>
+		<h2 class="comments_title title"> COMMENTS ON "{{ post.title }}"</h2>
+		<ul id="comments" class="comments">
+			{% for comment in post.comment_set.all %}
+			<li id="comment_{{ comment.id }}" class="comment">
+			<div class="avatar">
+				<img src="http://www.gravatar.com/avatar/{{ comment.email }}?r=g&d=mm&s=48" onerror="javascript:this.src='/static/image/default_avatar.png'"/>
+			</div>
+			<div class="comment_body">
+				<div class="comment_meta">
+					{% if comment.url %}
+                    <a href="{{ comment.url }}" rel="external nofollow" class="comment_author_url author">{{ comment.name }}</a>
+					{% else %}
+					<span rel="external nofollow" class="comment_author_url author">{{ comment.name }}</span>
+					{% endif %}
+					<a href="#comment_{{ comment.id }}" rel="nofollow" class="time">
+						{{ comment.created_at }}
+					</a>
+				</div>
+				<div class="comment_text">{{ comment.content }}</div>
+			</div>
+			<a href="#respond" class="reply" title="Notify this pumpkin." onclick="document.getElementById('comment').focus();document.getElementById('comment').value += '@[{{ comment.name }}](#comment_{{ comment.id }}) '">Reply</a>
+			<div class="sep"></div>
+			</li>
+			{% endfor %}
+		</ul>
+
+		<div id="respond" class="comments_reply">
+			<h3 class="title">Leave a Reply</h3>
+            <form action="{{ post.get_absolute_url }}comment" method="GET" id="comment_form" name="comment" prefix="comment/" onsubmit="this.method='POST';this.action=this.getAttribute('prefix')+'n'+'e'+'w'">
+				<p><input type="text" name="name" id="name" size="22" tabindex="1" aria-required="true" value="">
+				<label for="author">Name (required)</label></p>
+
+				<p><input type="text" name="email" id="email" size="22" tabindex="2" aria-required="true" value="">
+				<label for="email">Mail (will not be published or shared) (required)</label></p>
+
+				<p><input type="text" name="url" id="url" size="22" tabindex="3" value="">
+				<label for="url">Website</label></p>
+				<p><textarea name="text" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
+				<p><input name="submit" class="button" type="submit" id="submit" tabindex="5" value="Submit Comment">
+                <input type="hidden" name="article_name" value="{{ post.id }}"/>
+				</p>
+			</form>
+		</div> <!-- #respond -->
 	</div> <!-- .inner -->
 </div>	<!-- .article -->
 {% endblock %}

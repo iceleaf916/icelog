@@ -1,4 +1,7 @@
-from blog.models import Category, Post, Link
+# coding: utf-8
+# Author: iceleaf<kaisheng.ye@gmail.com>
+
+from blog.models import Category, Post, Link, Comment, Tag
 from django.contrib import admin
 
 class LinkAdmin(admin.ModelAdmin):
@@ -13,6 +16,14 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ['category', 'author', 'created_at']
     date_hierarchy = 'created_at'
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'website', 'created_at']
+
+class TagAdmin(admin.ModelAdmin):
+    list_display = ['name',]
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Link, LinkAdmin)
+admin.site.register(Comment, CommentAdmin)
+admin.site.register(Tag, TagAdmin)

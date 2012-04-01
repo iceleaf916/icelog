@@ -2,6 +2,7 @@
 
 from django.shortcuts import render_to_response
 from blog.models import Post, Category, Link
+from django.template import RequestContext
 
 def index(request):
     latest_posts = Post.objects.all().order_by('-created_at')[:10]
@@ -12,12 +13,12 @@ def index(request):
                 'category_list': category_list,
                 'link_list': link_list,
                 'is_single': False,
-            })
+            }, context_instance=RequestContext(request))
 
 def detail(request, post_id):
     post = Post.objects.get(pk=post_id)
     return render_to_response('single.html',{
                 'post': post,
                 'is_single': True,
-            })
+            }, context_instance=RequestContext(request))
 
