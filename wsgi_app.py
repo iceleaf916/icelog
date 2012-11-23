@@ -1,8 +1,7 @@
-#!/usr/bin/python2.6
+#!/home/iceleaf/envicelog/bin/python
 # coding: utf-8
 
 import sys, os
-from django.core.handlers import wsgi
 
 abspath = os.path.abspath(__file__)
 dirname = os.path.dirname(abspath)
@@ -13,6 +12,17 @@ if updir not in sys.path:
 if dirname not in sys.path:
     sys.path.insert(0, dirname)
 
+sys.stdout = sys.stderr
+# Add the virtual Python environment site-packages directory to the path
+import site
+site.addsitedir('/home/iceleaf/envicelog/lib/python2.6/site-packages')
+
+
+# Avoid ``[Errno 13] Permission denied: '/var/www/.python-eggs'`` messages
+import os
+os.environ['PYTHON_EGG_CACHE'] = '/var/www/blog/egg-cache'
+
 os.environ['DJANGO_SETTINGS_MODULE'] = 'icelog.settings'
 
-application = wsgi.WSGIHandler()
+import django.core.handlers.wsgi
+application = django.core.handlers.wsgi.WSGIHandler()
