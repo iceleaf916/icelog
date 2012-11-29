@@ -1,0 +1,38 @@
+<VirtualHost *:80>
+	ServerAdmin webmaster@localhost
+	ServerName coolfox.tk
+	
+	Alias /robots.txt /home/iceleaf/static/robots.txt
+	Alias /favicon.ico /home/iceleaf/static/favicon.ico
+
+	AliasMatch ^/([^/]*\.css) /home/iceleaf/static/styles/$1
+
+	Alias /media/ /home/iceleaf/media/
+	Alias /static/ /home/iceleaf/static/
+
+	<Directory /home/iceleaf/static>
+		Order deny,allow
+		Allow from all
+	</Directory>
+
+	<Directory /home/iceleaf/media>
+		Order deny,allow
+		Allow from all
+	</Directory>
+
+	WSGIScriptAlias / /home/iceleaf/icelog/wsgi_app.py
+	<Directory /home/iceleaf/icelog>
+	<Files wsgi_app.py>
+		Order allow,deny
+		Allow from all
+	</Files>
+	</Directory>
+
+	ErrorLog ${APACHE_LOG_DIR}/blog_error.log
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+
+	CustomLog ${APACHE_LOG_DIR}/blog_access.log combined
+</VirtualHost>
