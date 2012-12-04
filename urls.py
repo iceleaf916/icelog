@@ -7,7 +7,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'icelog.views.home'),
+    #url(r'^$', 'icelog.views.home'),
     # url(r'^icelog/', include('icelog.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
@@ -18,7 +18,7 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('blog.views',
-    url(r'^blog/$','index'),
-    url(r'^blog/post/(?P<post_id>\d+)/$','detail'),
+    url(r'^$','index'),
+    url(r'^post/(?P<post_id>\d+)/$','detail'),
 )
 

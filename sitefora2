@@ -1,6 +1,6 @@
 <VirtualHost *:80>
 	ServerAdmin webmaster@localhost
-	ServerName coolfox.tk
+	ServerName icelog.tk
 	
 	Alias /robots.txt /home/iceleaf/static/robots.txt
 	Alias /favicon.ico /home/iceleaf/static/favicon.ico
