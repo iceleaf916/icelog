@@ -389,7 +389,7 @@ input[type="text"]:focus, textarea:focus {
 .comments {
 	list-style-type: none;
 	margin: 0;
-	padding: 60px 0 0 0;
+	padding: 0 0 0 0;
 }
 
 .comments .comment {
@@ -438,8 +438,8 @@ input[type="text"]:focus, textarea:focus {
 }
 
 #respond {
-	margin: 50px 0;
-	padding: 20px 0 0 0;
+	margin: 0 0;
+	padding: 0 0 0 0;
 }
 #respond > h3 {
 	font-size: 20px;

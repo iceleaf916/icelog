@@ -3,6 +3,7 @@
 
 from django.db import models
 from django.contrib.auth.models import User
+from tagging.fields import TagField
 
 class Category(models.Model):
     name = models.CharField(max_length=50, verbose_name=u'类名')
@@ -19,7 +20,7 @@ class Category(models.Model):
     class Meta:
         ordering = ['seq']
         verbose_name_plural = verbose_name = u'分类'
-
+'''
 class Tag(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name=u'名称')
 
@@ -31,6 +32,7 @@ class Tag(models.Model):
 
     class Meta:
         verbose_name_plural = verbose_name = u'标签'
+'''
 
 class Post(models.Model):
     title = models.CharField(max_length=200, verbose_name=u'标题')
@@ -39,7 +41,8 @@ class Post(models.Model):
     content = models.TextField(verbose_name=u'内容')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'发布时间')
     category = models.ForeignKey(Category)
-    tags = models.ManyToManyField(Tag, blank=True, verbose_name=u'标签')
+    #tags = models.ManyToManyField(Tag, blank=True, verbose_name=u'标签')
+    tags = TagField()
     
     def __unicode__(self):
         return self.title
@@ -68,6 +71,7 @@ class Link(models.Model):
         ordering = ['seq']
         verbose_name_plural = verbose_name = u'链接'
 
+"""
 class Comment(models.Model):
     name = models.CharField(max_length=100, verbose_name=u'昵称')
     email = models.EmailField(verbose_name=u'邮箱')
@@ -83,3 +87,4 @@ class Comment(models.Model):
         get_latest_by = 'created_at'
         ordering = ['-id']
         verbose_name_plural = verbose_name = u'评论'
+"""

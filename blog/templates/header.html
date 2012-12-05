@@ -1,10 +1,32 @@
-{{define "HEADER"}}
+<!DOCTYPE html>
+<html xml:lang="en-US" lang="en-US">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>
+        {% if is_single %}
+            {{ post.title}} | {{ settings.SITE_NAME }}
+        {% else %}
+            {{ settings.SITE_NAME }}
+        {% endif %}
+	</title>
+	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+
+    {% load static %}
+    {% get_static_prefix as STATIC_PREFIX %}
+	<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/style.css" type="text/css" media="screen" /> 
+	<link rel="shortcut icon" type="image/png" href="{{ STATIC_PREFIX }}image/favicon.ico" />    
+	<link href="/feed/atom" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed" />    
+	<script type="text/javascript" src="{{ STATIC_PREFIX }}js/jquery.js"></script>
+	<script type="text/javascript" src="{{ STATIC_PREFIX }}js/main.js"></script>
+</head>
+<body>
+<!-- header start -->
 <div id="header">
 	<div id="nav_wrapper">
 		<div id="nav">
 			<div class="inner">
-				<h1 id="title"><a href="{{.SiteConfig.SiteURL}}">{{.SiteConfig.SiteTitle}}</a></h1>
-				<div id="description" class="seal">{{.SiteConfig.SiteSubTitle}}</div>
+				<h1 id="title"><a href="{{ settings.SITE_URL }}">{{ settings.SITE_NAME }}</a></h1>
+				<div id="description" class="seal">{{ settings.SITE_SUB_NAME }}</div>
 				<ul class="right">
 					<li><a href="/">Home</a></li>
 					<li class="dot">&bull;</a>
@@ -16,32 +38,34 @@
 					<li class="dot">&bull;</a>
 					<li><a href="/t/linux">Linux</a></li>
 					<li class="dot">&bull;</a>
-					<li><a href="/guard">Login</a></li>
+					<li><a href="/admin/">Login</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 	<div id="header_inner">
 		<div id="social">
-			<a href="http://twitter.com/shellex" target="_blank" title="Follow Me @ Twitter"><img src="{{$.Fn.GetThemeStaticURL}}/image/ic16_twitter.png"></a>
-			<a href="http://github.com/shellex" target="_blank" title="Fork Me @ Github"><img src="{{$.Fn.GetThemeStaticURL}}/image/ic16_github.png"></a>
-			<a href="http://feeds.feedburner.com/shellex-cn" target="_blank" title="Subscribe My Blog"><img src="{{$.Fn.GetThemeStaticURL}}/image/ic16_rss.png"></a>
+			<a href="http://twitter.com/happyyezi" target="_blank" title="Follow Me @ Twitter"><img src="{{ STATIC_PREFIX }}image/ic16_twitter.png"></a>
+			<a href="http://github.com/iceleaf916" target="_blank" title="Fork Me @ Github"><img src="{{ STATIC_PREFIX }}image/ic16_github.png"></a>
+			<a href="/feed/" target="_blank" title="Subscribe My Blog"><img src="{{ STATIC_PREFIX }}image/ic16_rss.png"></a>
 		</div>
-		<ul id="recent_comments">
-			{{range $index, $comm := $.Fn.GetCommentTimeline 0 10 }}
+<!--
+        <ul id="recent_comments">
+			#range $index, $comm := $.Fn.GetCommentTimeline 0 10 #
 			<li>
-				<a href="/{{$comm.Metadata.ArticleName}}/#comment_{{$comm.Metadata.Name}}" class="avatar recent_comment">
-					{{if $comm.Metadata.EmailHash}}
-					<img src="http://www.gravatar.com/avatar/{{$comm.Metadata.EmailHash}}?r=g&d=mm&s=32" onerror="javascript:this.src='{{$.Fn.GetThemeStaticURL}}/image/default_avatar.png'"/>
-					{{else}}
-					<img src="{{$.Fn.GetThemeStaticURL}}/image/default_avatar.png"/>
-					{{end}}
+				<a href="/#$comm.Metadata.ArticleName#/#comment_#$comm.Metadata.Name#" class="avatar recent_comment">
+					#if $comm.Metadata.EmailHash#
+					<img src="http://www.gravatar.com/avatar/#$comm.Metadata.EmailHash#?r=g&d=mm&s=32" onerror="javascript:this.src='# STATIC_PREFIX #image/default_avatar.png'"/>
+					#else#
+					<img src="# STATIC_PREFIX #image/default_avatar.png"/>
+					#end#
 				</a>
-				<div class="bubble"><div class="bubble_text">{{$comm.Text}}</div></div>
+				<div class="bubble"><div class="bubble_text">#$comm.Text#</div></div>
 			</li>
-			{{end}}
+			#end#
 		</ul>
+-->
 		<div class="sep"></div>
 	</div>
 </div>
-{{end}}
+<!-- header end -->

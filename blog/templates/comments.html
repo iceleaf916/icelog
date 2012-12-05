@@ -1,0 +1,55 @@
+{% load comments %}
+{% get_comment_list for post as comment_list %}
+{% get_comment_count for post as comment_count %}
+{% if comment_count %}
+<h2 class="comments_title title" id="comment">{{ comment_count }} COMMENT{{ comment_count|pluralize }} ON "{{ post.title }}"</h2>
+<ul id="comments" class="comments">
+    {% for comment in comment_list %}
+    <li id="comment_{{ comment.object_pk }}" class="comment">
+    <div class="avatar">
+        <img src="http://www.gravatar.com/avatar/{{ comment.user_email }}?r=g&d=mm&s=48" onerror="javascript:this.src='/static/image/default_avatar.png'"/>
+    </div>
+    <div class="comment_body">
+        <div class="comment_meta">
+            {% if comment.user_url %}
+            <a href="{{ comment.user_url }}" rel="external nofollow" class="comment_author_url author">{{ comment.user_name }}</a>
+            {% else %}
+            <span rel="external nofollow" class="comment_author_url author">{{ comment.user_name }}</span>
+            {% endif %}
+            <a href="#comment_{{ comment.object_pk }}" rel="nofollow" class="time">{{ comment.submit_date }}</a>
+        </div>
+        <div class="comment_text">{{ comment.comment }}</div>
+    </div>
+    <a href="#respond" class="reply" title="Notify this pumpkin." onclick="document.getElementById('comment').focus();document.getElementById('comment').value += '@[{{ comment.user_name }}](#comment_{{ comment.object_pk }}) '">Reply</a>
+    <div class="sep"></div>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<h2 class="comments_title title" id="comment">NO COMMENT ON "{{ post.title }}"</h2>
+{% endif %}
+
+{% get_comment_form for post as form %}
+<div id="respond" class="comments_reply">
+    <h3 class="title">Leave a Reply</h3> 
+    <form action="{% comment_form_target %}" method="post">
+    {% csrf_token %}
+    {{form.object_pk}}
+    {{form.content_type}}
+    {{form.timestamp}}
+    {{form.security_hash}}
+        <p><input type="text" name="name" id="name" size="22" tabindex="1" aria-required="true" value="">
+        <label for="author">Name (required)</label></p>
+
+        <p><input type="text" name="email" id="email" size="22" tabindex="2" aria-required="true" value="">
+        <label for="email">Mail (will not be published or shared) (required)</label></p>
+
+        <p><input type="text" name="url" id="url" size="22" tabindex="3" value="">
+        <label for="url">Website</label></p>
+
+        <p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
+        <p style="display:none;"><label for="id_honeypot">如果你在该字段中输入任何内容，那么你的评论就会被视为垃圾评论。</label> <input type="text" name="honeypot" id="id_honeypot"></p>
+        <p><input name="post" class="button" type="submit" id="submit" tabindex="5" value="Submit Comment">
+        </p>
+    </form>
+</div> 

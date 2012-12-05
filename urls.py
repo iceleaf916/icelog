@@ -1,3 +1,4 @@
+import django
 from django.conf.urls.defaults import patterns, include, url
 import blog.views
 
@@ -15,10 +16,12 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+
+    (r'^comments/', include('django.contrib.comments.urls')),
 )
 
 urlpatterns += patterns('blog.views',
     url(r'^$','index'),
-    url(r'^post/(?P<post_id>\d+)/$','detail'),
+    url(r'^post/(?P<post_id>\d+)/$','single'),
 )
 

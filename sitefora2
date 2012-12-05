@@ -2,20 +2,20 @@
 	ServerAdmin webmaster@localhost
 	ServerName icelog.tk
 	
-	Alias /robots.txt /home/iceleaf/static/robots.txt
-	Alias /favicon.ico /home/iceleaf/static/favicon.ico
+	Alias /robots.txt /home/iceleaf/icelog/static/robots.txt
+	Alias /favicon.ico /home/iceleaf/icelog/static/favicon.ico
 
-	AliasMatch ^/([^/]*\.css) /home/iceleaf/static/styles/$1
+	AliasMatch ^/([^/]*\.css) /home/iceleaf/icelog/static/styles/$1
 
-	Alias /media/ /home/iceleaf/media/
-	Alias /static/ /home/iceleaf/static/
+	Alias /media/ /home/iceleaf/icelog/media/
+	Alias /static/ /home/iceleaf/icelog/static/
 
-	<Directory /home/iceleaf/static>
+	<Directory /home/iceleaf/icelog/static>
 		Order deny,allow
 		Allow from all
 	</Directory>
 
-	<Directory /home/iceleaf/media>
+	<Directory /home/iceleaf/icelog/media>
 		Order deny,allow
 		Allow from all
 	</Directory>
