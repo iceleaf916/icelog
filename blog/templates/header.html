@@ -13,11 +13,14 @@
 
     {% load static %}
     {% get_static_prefix as STATIC_PREFIX %}
+    {% load comments %}
 	<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/style.css" type="text/css" media="screen" /> 
 	<link rel="shortcut icon" type="image/png" href="{{ STATIC_PREFIX }}image/favicon.ico" />    
 	<link href="/feed/atom" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed" />    
 	<script type="text/javascript" src="{{ STATIC_PREFIX }}js/jquery.js"></script>
 	<script type="text/javascript" src="{{ STATIC_PREFIX }}js/main.js"></script>
+	<script type="text/javascript" src="{{ STATIC_PREFIX }}js/comments.js"></script>
+
 </head>
 <body>
 <!-- header start -->
