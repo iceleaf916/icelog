@@ -3,6 +3,7 @@
 {% block content %}
 <div class="article">
 	<div class="inner">
+        {% load markup %}
 		{% for post in post_list %}
 		<h2 class="article_title title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
 		<div class="article_meta">
@@ -16,7 +17,7 @@
             <a href="{{ post.get_absolute_url }}#comment">{% if comment_count %} {{ comment_count }} COMMENT{{ comment_count|pluralize }} {% else %} NO COMMENT {% endif %}</a>
 		</div>
 		<div class="text">
-			{{ post.content }}
+			{{ post.content|markdown }}
 		</div>
 		<div class="big_sep"></div>
 		<div class="article_meta">
