@@ -17,7 +17,8 @@
             <a href="/blog/category/{{ post.category.slug }}/">{{ post.category.name }}</a>
 		</div>
 		<div class="text">
-			{{ post.content }}
+            {% load markup %}
+            {{ post.content|markdown }}
 		</div>
 		<div class="big_sep"></div>
 		<div class="article_meta">
