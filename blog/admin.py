@@ -16,14 +16,14 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ['title']
     list_filter = ['category', 'author', 'created_at']
     date_hierarchy = 'created_at'
+    
+    class Media:
+        js = (
+            '/static/js/tiny_mce/tiny_mce.js',
+            '/static/js/textareas.js',
+        )
 
-'''
-class TagAdmin(admin.ModelAdmin):
-    list_display = ['name',]
-'''
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Link, LinkAdmin)
-#admin.site.register(Tag, TagAdmin)
-#tagging.register(Post)

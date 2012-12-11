@@ -36,9 +36,9 @@ class Tag(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=200, verbose_name=u'标题')
-    slug = models.CharField(max_length=100, blank=True, verbose_name=u'slug', help_text=u'本文的短标签，将出现在文章 URL 中。可包含字母、数字、减号、下划线，如：does-python-optimize-function-calls-from-loops')
+    slug = models.CharField(max_length=100, verbose_name=u'slug', help_text=u'本文的短标签，将出现在文章 URL 中。可包含字母、数字、减号、下划线，如：does-python-optimize-function-calls-from-loops')
     author = models.ForeignKey(User)
-    content = models.TextField(verbose_name=u'内容')
+    content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=u'发布时间')
     category = models.ForeignKey(Category)
     #tags = models.ManyToManyField(Tag, blank=True, verbose_name=u'标签')
@@ -52,7 +52,26 @@ class Post(models.Model):
 #                self.created_at.strftime('%m'), 
 #                self.slug or self.title.replace('/', '-'),
         )
+    
+    def __get_excerpt(self):
+        return self.content.split('<!--more-->')[0]
 
+    excerpt = property(__get_excerpt)
+
+    def __get_remain(self):
+        return self.content.split('<!--more-->')[1]
+
+    remain = property(__get_remain)
+
+    def __get_pagebreak(self):
+        try:
+            self.content.index('<!--more-->')
+        except ValueError:
+            return False
+        else:
+            return True
+    pagebreak = property(__get_pagebreak)
+    
     class Meta:
         get_latest_by = 'created_at'
         ordering = ['-id']

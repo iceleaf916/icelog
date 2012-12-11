@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load highlight tagging_tags %}
+
 {% block content %}
 <div class="article">
 	<div class="inner">
@@ -17,13 +19,14 @@
             <a href="/blog/category/{{ post.category.slug }}/">{{ post.category.name }}</a>
 		</div>
 		<div class="text">
-            {% load markup %}
-            {{ post.content|markdown }}
+            
+            {% autoescape off %}
+            {{ post.content|do_highlight}}
+            {% endautoescape %}
 		</div>
 		<div class="big_sep"></div>
 		<div class="article_meta">
             <span>tagged:</span>
-            {% load tagging_tags %}
             {% tags_for_object post as tag_list %}
             {% for tag in tag_list %}
             <a class="tag" href="/blog/t/{{ tag.name }}">{{ tag.name }}</a>
