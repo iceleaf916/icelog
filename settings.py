@@ -16,8 +16,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'icelog.db',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': '',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -146,12 +146,6 @@ LOGGING = {
         },
     }
 }
-
-# site information
-SITE_NAME = '酷狐'
-SITE_URL = 'http://coolgox.tk/'
-SITE_SUB_NAME = 'Just a cool fox'
-GOOGLE_ANALYTICS_UA = ''
 
 # other importent data
 try:

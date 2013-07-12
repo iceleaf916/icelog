@@ -15,7 +15,7 @@ if dirname not in sys.path:
 sys.stdout = sys.stderr
 # Add the virtual Python environment site-packages directory to the path
 import site
-site.addsitedir('/home/iceleaf/envicelog/lib/python2.6/site-packages')
+site.addsitedir('/home/iceleaf/icelog_env/lib/python2.7/site-packages/')
 
 
 # Avoid ``[Errno 13] Permission denied: '/var/www/.python-eggs'`` messages
