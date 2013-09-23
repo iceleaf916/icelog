@@ -1,5 +1,5 @@
 *.pyc
 icelog.db
 local_settings.py
-static
-media
+/static
+/media
