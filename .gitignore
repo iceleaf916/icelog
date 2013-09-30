@@ -3,3 +3,4 @@ icelog.db
 local_settings.py
 /static
 /media
+migrations
