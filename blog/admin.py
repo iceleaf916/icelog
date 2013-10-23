@@ -1,7 +1,7 @@
 # coding: utf-8
 # Author: iceleaf<kaisheng.ye@gmail.com>
 
-from blog.models import Category, Post, Link 
+from blog.models import Category, Post, Link, Settings
 from django.contrib import admin
 import tagging
 
@@ -27,3 +27,4 @@ class PostAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Link, LinkAdmin)
+admin.site.register(Settings)

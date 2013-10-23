@@ -3,3 +3,4 @@ MySQL-python
 django-tagging
 Pygments==1.5
 South
+uwsgi

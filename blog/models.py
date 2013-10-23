@@ -5,6 +5,16 @@ from django.db import models
 from django.contrib.auth.models import User
 from tagging.fields import TagField
 
+class Settings(models.Model):
+    key = models.CharField(max_length=255)
+    value = models.CharField(max_length=510)
+
+    def __unicode__(self):
+        return "%s=%s" % (self.key, self.value)
+
+    class Meta:
+        verbose_name_plural = verbose_name = u'设置'
+
 class Category(models.Model):
     name = models.CharField(max_length=50, verbose_name=u'类名')
     slug = models.CharField(max_length=50, verbose_name=u'slug', help_text=u'本文的短标签，将出现在文章 URL 中。可包含字母、数字、减号、下划线，如：does-python-optimize-function-calls-from-loops')
