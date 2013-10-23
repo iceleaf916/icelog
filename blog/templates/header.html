@@ -66,6 +66,7 @@
                     <li><a href="/admin/">{% trans "Login" %}</a></li>
                     {% endif %}
                     {% if user.is_authenticated %}
+					<li class="dot">&bull;</a>
                     <li><a href="/admin/logout/">{% trans "Logout" %}</a></li>
                     {% endif %}
 				</ul>
