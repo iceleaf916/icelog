@@ -105,6 +105,17 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
+)
+
 ROOT_URLCONF = 'icelog.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
@@ -123,11 +134,16 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'wpadmin',
+    'wpadmin.menu',
+    'wpadmin.dashboard',
     'django.contrib.admin',
     'django.contrib.comments',
+
     'south',
-    'blog',
     'tagging',
+
+    'blog',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -157,6 +173,15 @@ LOGGING = {
             'propagate': True,
         },
     }
+}
+
+WPADMIN = {
+    'admin': {
+        'menu': {
+            'top': 'wpadmin.menu.menus.TopMenu',
+            'left': 'wpadmin.menu.menus.LeftMenu',
+        }
+    },
 }
 
 try:
