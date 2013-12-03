@@ -73,12 +73,12 @@
 			<h3>META</h3>
 			<ul>
 				{% if user.is_staff %}
-                	<li><a href="/admin/">"Admin"</a></li>
+                	<li><a href="/admin/">Admin</a></li>
                 {% else %}
-                	<li><a href="/admin/">"Login"</a></li>
+                	<li><a href="/admin/">Login</a></li>
                 {% endif %}
                 {% if user.is_authenticated %}
-                	<li><a href="/admin/logout/">"Logout"</a></li>
+                	<li><a href="/admin/logout/">Logout</a></li>
                 {% endif %}
 			</ul>
 		</div>
