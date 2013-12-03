@@ -1,7 +1,7 @@
 {% include "header.html" %}
 
 {% load comments tagging_tags %}
-{% if post_list.length %}
+{% if post_list %}
 	{% for post in post_list %}
 	<div class="post">
 		<h3 class="title"><a href="{{ post.get_absolute_url }}" rel="bookmark">{{ post.title }}</a></h3>

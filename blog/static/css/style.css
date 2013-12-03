@@ -16,7 +16,7 @@ body{
 	color:#333;
 	font-size:14px;
 	font-family:"Microsoft YaHei",Verdana,Tahoma,"BitStream vera Sans",Arial,Helvetica,sans-serif;
-	background:#8ec1da;
+	background: url('/static/image/page_bg.gif') repeat;
 }
 #container{
 	margin:0 auto;
