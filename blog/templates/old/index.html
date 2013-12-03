@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% load comments tagging_tags %}
+
+{% block content %}
+<div class="article">
+	<div class="inner">
+		{% for post in post_list %}
+		<h2 class="article_title title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+		<div class="article_meta">
+			<span>by</span>
+            {{ post.author }}
+			<span>on</span>
+            {{ post.created_at|date:"M d Y" }}
+			<span>with</span>
+            {% get_comment_count for post as comment_count %}
+            <a href="{{ post.get_absolute_url }}#comment">{% if comment_count %} {{ comment_count }} COMMENT{{ comment_count|pluralize }} {% else %} NO COMMENT {% endif %}</a>
+		</div>
+		<div class="text">
+            {% autoescape off %}
+			{{ post.excerpt }} {% if post.pagebreak %}<a href="{{ post.get_absolute_url }}#more-{{ post.id }}">Read More...</a>{% endif %}
+            {% endautoescape %}
+		</div>
+		<div class="big_sep"></div>
+		<div class="article_meta">
+            <span>tagged:</span>
+            {% tags_for_object post as tag_list %}
+            {% for tag in tag_list %}
+            <a class="tag" href="/t/{{ tag.name }}">{{ tag.name }}</a>
+            {% endfor %}
+       </div>
+        {% endfor %}
+	</div>
+</div>
+{% endblock %}
+

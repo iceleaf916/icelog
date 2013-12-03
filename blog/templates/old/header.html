@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xml:lang="en-US" lang="en-US">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>
+        {% if is_single %}
+            {{ post.title}} | {{ settings.site_name }}
+        {% else %}
+            {{ settings.site_name }}
+        {% endif %}
+	</title>
+    <!--<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>-->
+
+    {% load static i18n comments %}
+    {% get_static_prefix as STATIC_PREFIX %}
+	<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/style.css" type="text/css" media="screen" /> 
+	<link rel="shortcut icon" type="image/png" href="{{ STATIC_PREFIX }}image/favicon.ico" />    
+	<link href="/feed/atom" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed" />    
+	<script type="text/javascript" src="{{ STATIC_PREFIX }}js/jquery.js"></script>
+	<script type="text/javascript" src="{{ STATIC_PREFIX }}js/main.js"></script>
+	<script type="text/javascript" src="{{ STATIC_PREFIX }}js/comments.js"></script>
+
+    <link href="{{ STATIC_PREFIX }}js/syntaxhighlighter/styles/shCore.css" type="text/css" rel="stylesheet"/>
+    <link href="{{ STATIC_PREFIX }}js/syntaxhighlighter/styles/shThemeDefault.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}js/syntaxhighlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}js/syntaxhighlighter/scripts/shBrushPython.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}js/syntaxhighlighter/scripts/shBrushXml.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}js/syntaxhighlighter/scripts/shBrushSql.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}js/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}js/syntaxhighlighter/scripts/shBrushJava.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}js/syntaxhighlighter/scripts/shBrushCss.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}js/syntaxhighlighter/scripts/shBrushCpp.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}js/syntaxhighlighter/scripts/shBrushPerl.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}js/syntaxhighlighter/scripts/shBrushBash.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}js/syntaxhighlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}js/syntaxhighlighter/scripts/shBrushPhp.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}js/syntaxhighlighter/scripts/shBrushPerl.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}js/syntaxhighlighter/scripts/shCore.js"></script>
+    <script  type = "text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+
+</head>
+<body>
+<!-- header start -->
+<div id="header">
+	<div id="nav_wrapper">
+		<div id="nav">
+			<div class="inner">
+				<h1 id="title"><a href="{{ settings.SITE_URL }}">{{ settings.SITE_NAME }}</a></h1>
+				<div id="description" class="seal">{{ settings.SITE_SUB_NAME }}</div>
+				<ul class="right">
+					<li><a href="/">Home</a></li>
+					<li class="dot">&bull;</a>
+					<li><a href="/t/tech">Tech</a></li>
+					<li class="dot">&bull;</a>
+					<li><a href="/t/english">English</a></li>
+					<li class="dot">&bull;</a>
+					<li><a href="/t/paint">Artworks</a></li>
+					<li class="dot">&bull;</a>
+					<li><a href="/t/linux">Linux</a></li>
+					<li class="dot">&bull;</a>
+                    {% if user.is_staff %}
+                    <li><a href="/admin/">{% trans "Admin" %}</a></li>
+                    {% else %}
+                    <li><a href="/admin/">{% trans "Login" %}</a></li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+					<li class="dot">&bull;</a>
+                    <li><a href="/admin/logout/">{% trans "Logout" %}</a></li>
+                    {% endif %}
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="header_inner">
+		<div id="social">
+			<a href="http://twitter.com/happyyezi" target="_blank" title="Follow Me @ Twitter"><img src="{{ STATIC_PREFIX }}image/ic16_twitter.png"></a>
+			<a href="http://github.com/iceleaf916" target="_blank" title="Fork Me @ Github"><img src="{{ STATIC_PREFIX }}image/ic16_github.png"></a>
+			<a href="/feed/" target="_blank" title="Subscribe My Blog"><img src="{{ STATIC_PREFIX }}image/ic16_rss.png"></a>
+		</div>
+<!--
+        <ul id="recent_comments">
+			#range $index, $comm := $.Fn.GetCommentTimeline 0 10 #
+			<li>
+				<a href="/#$comm.Metadata.ArticleName#/#comment_#$comm.Metadata.Name#" class="avatar recent_comment">
+					#if $comm.Metadata.EmailHash#
+					<img src="http://www.gravatar.com/avatar/#$comm.Metadata.EmailHash#?r=g&d=mm&s=32" onerror="javascript:this.src='# STATIC_PREFIX #image/default_avatar.png'"/>
+					#else#
+					<img src="# STATIC_PREFIX #image/default_avatar.png"/>
+					#end#
+				</a>
+				<div class="bubble"><div class="bubble_text">#$comm.Text#</div></div>
+			</li>
+			#end#
+		</ul>
+-->
+		<div class="sep"></div>
+	</div>
+</div>
+<!-- header end -->
