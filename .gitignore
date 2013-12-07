@@ -4,3 +4,6 @@ local_settings.py
 /static
 /media
 migrations
+/run
+/logs
+/virtualenv

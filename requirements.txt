@@ -1,7 +1,9 @@
 Django==1.5.1
-MySQL-python
-django-tagging
+MySQL-python==1.2.4
 Pygments==1.5
-South
-uwsgi
-django-wpadmin
+South==0.8.1
+argparse==1.2.1
+django-tagging==0.3.1
+django-wpadmin==0.2.0
+uWSGI==1.9.17.1
+wsgiref==0.1.2
